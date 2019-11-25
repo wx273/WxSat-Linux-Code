@@ -5,11 +5,9 @@ This code is based on Paolo Franchini's work at https://github.com/pfranchini/we
 
 This code was developed on Manjaro Linux but should work on other distributions. It uses the following external code:
 
-meteor_demodulator
-medet
+Software - wxtoimg (for NOAA satellites). rtl_fm package, sox, Imagemagick, rectify.py, meteor_demodulator, medet
 
-It also has the following dependencies:
+It also has the following hardware requirements:
 
 Hardware - Software Defined Radio (SDR), suitable antenna (I use a homemade QFH), laptop or desktop with suitable Linux distro.
 
-Software - wxtoimg (for NOAA satellites). rtl_fm package, sox, Imagemagick, rectify.py
