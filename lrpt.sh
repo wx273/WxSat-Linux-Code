@@ -123,7 +123,3 @@ echo "Completed processing pass ${fileshort}" >> ${dir}/jobs.log
 # Cleanup files except decoded data and output image
 #rm -f ${file}_norm.wav ${file}.wav ${file}.qpsk ${file}.bmp
 #rm -f ${file}.dec
-
-
-
-
