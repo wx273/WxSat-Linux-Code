@@ -98,9 +98,9 @@ else
   echo "complete" >> ${dir}/jobs.log
 fi
 
-# Invert image if hour is > 12:00
+# Invert image if hour is > 11:00
 HOUR=`echo ${file} | awk -F "/" '{print $NF}' | cut -c10,11`       # Calc current hour
-if [ ${HOUR} -gt 12 ] ; then
+if [ ${HOUR} -gt 11 ] ; then
   printf "Inverting image - \n" >> ${dir}/jobs.log
   convert -quiet -rotate 180 ${file}.png ${file}.png.inv
   mv -f ${file}.png.inv ${file}.png
@@ -119,11 +119,6 @@ echo "Final image is zero bytes - not copying to www dir" >> ${dir}/jobs.log
 fi
 
 echo "Completed processing pass ${fileshort}" >> ${dir}/jobs.log
-
-
-
-
-
 
 # Cleanup files except decoded data and output image
 #rm -f ${file}_norm.wav ${file}.wav ${file}.qpsk ${file}.bmp
