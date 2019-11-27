@@ -1,0 +1,2 @@
+01 00 * * * cd /home/user1/Satellite/code; /home/user1/Satellite/code/schedule.sh
+02 00 * * * cd /home/user1/www; /home/user1/www/makethumbs
