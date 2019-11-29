@@ -78,7 +78,6 @@ if [ ${BRIGHTNESS} -lt 20 ] ; then
     printf "Contrast enhance IR image using CLAHE filter - \n" >> ${dir}/jobs.log
     /usr/bin/magick ${file}.bmp -virtual-pixel mirror -clahe 300x300+128+2 ${file}.png ; rm ${file}.bmp
     echo "complete" >> ${dir}/jobs.log
-  #fi 
   elif [ ${SAT} == "M22" ] && [ ${M22FORMAT} == "125" ]; then
     printf "Image brightness only ${BRIGHTNESS} - re-decoding with IR settings - \n" >> ${dir}/jobs.log
     $decoder ${file}.qpsk ${file} -diff -cd -cn -r 68 -g 68 -b 68 -q
