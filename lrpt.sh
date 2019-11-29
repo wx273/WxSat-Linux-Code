@@ -76,7 +76,7 @@ if [ ${BRIGHTNESS} -lt 20 ] ; then
     $decoder ${file}.qpsk ${file} -cd -cn -r 68 -g 68 -b 68 -q 
     echo "complete" >> ${dir}/jobs.log
     printf "Contrast enhance IR image using CLAHE filter - \n" >> ${dir}/jobs.log
-    /usr/bin/magick ${file}.bmp -virtual-pixel mirror -clahe 300x300+128+2 ${file}.png # rm ${file}.bmp
+    /usr/bin/magick ${file}.bmp -virtual-pixel mirror -clahe 300x300+128+2 ${file}.png ; rm ${file}.bmp
     echo "complete" >> ${dir}/jobs.log
   #fi 
   elif [ ${SAT} == "M22" ] && [ ${M22FORMAT} == "125" ]; then
@@ -84,9 +84,13 @@ if [ ${BRIGHTNESS} -lt 20 ] ; then
     $decoder ${file}.qpsk ${file} -diff -cd -cn -r 68 -g 68 -b 68 -q
     echo "complete" >> ${dir}/jobs.log
     printf "Contrast enhance IR image using CLAHE filter - \n" >> ${dir}/jobs.log
-    /usr/bin/magick ${file}.bmp -virtual-pixel mirror -clahe 300x300+128+2 ${file}.png # rm ${file}.bmp
+    /usr/bin/magick ${file}.bmp -virtual-pixel mirror -clahe 300x300+128+2 ${file}.png ; rm ${file}.bmp
     echo "complete" >> ${dir}/jobs.log
   fi 
+  
+  # Invert IR Image
+  convert -negate ${file}.png ${file}.png.inv ; mv ${file}.png.inv ${file}.png
+
 else
   printf "Image brightness ok - contrast enhance vis image using CLAHE filter - \n" >> ${dir}/jobs.log
   /usr/bin/magick ${file}.png -virtual-pixel mirror -clahe 300x300+128+2 ${file}a.png
