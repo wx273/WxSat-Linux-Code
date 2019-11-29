@@ -20,7 +20,6 @@ sox ${file}.wav ${file}_norm.wav gain -n -2  # Normalise audio sample
 echo "complete" >> ${dir}/jobs.log
 
 echo "Fetching happysat formats" >> ${dir}/jobs.log
-#wget -q -O http://happysat.nl/Meteor/html/Meteor_Status.html
 /usr/bin/curl -s -o Meteor_Status.html http://happysat.nl/Meteor/html/Meteor_Status.html
 M2FORMAT=`grep Visible/IR Meteor_Status.html | sed 's/[^0-9]*//g' | head -1`
 M22FORMAT=`grep Visible/IR Meteor_Status.html | sed 's/[^0-9]*//g' | tail -1`
@@ -38,26 +37,24 @@ echo "complete" >> ${dir}/jobs.log
 # Preserve original file date/time
 touch -r ${file}.wav ${file}.qpsk
 
-
 printf "Decoding qpsk/opqsk file using medet - \n" >> ${dir}/jobs.log
 # Decode using medet - creates .dec & .bmp:
 if [ ${SAT} == "M2" ]; then
     # Settings for M2
     if [[ ${M2FORMAT} == "123" ]]; then
-        $decoder ${file}.qpsk ${file} -cd -cn -q                    # For RGB 123
+        $decoder ${file}.qpsk ${file} -cd -cn -q
     elif [[ ${M2FORMAT} == "125" ]]; then
-        $decoder ${file}.qpsk ${file} -cd -cn -r 65 -g 65 -b 64 -q  # For RGB 125
+        $decoder ${file}.qpsk ${file} -cd -cn -r 65 -g 65 -b 64 -q
     fi
 else
     # Settings for M2-2
     if [[ ${M22FORMAT} == "123" ]]; then
-    $decoder ${file}.qpsk ${file} -diff -cd -cn -q                   # For RGB 123
+    $decoder ${file}.qpsk ${file} -diff -cd -cn -q
     elif [[ ${M22FORMAT} == "125" ]]; then
-    $decoder ${file}.qpsk ${file} -diff -cd -cn -r 65 -g 65 -b 64 -q # For RGB 125
+    $decoder ${file}.qpsk ${file} -diff -cd -cn -r 65 -g 65 -b 64 -q
     fi
 fi
 echo "complete" >> ${dir}/jobs.log
-
 
 touch -r ${file}.wav ${file}.dec                # Preserve original file date/time
 
@@ -65,7 +62,6 @@ echo "Coverting bitmap to png" >> ${dir}/jobs.log
 convert -quiet ${file}.bmp ${file}.png          # Convert Bitmap image to PNG
 
 touch -r ${file}.wav ${file}.png                # Preserve original file date/time
-
 
 echo "Checking image brightness" >> ${dir}/jobs.log
 BRIGHTNESS=`magick identify -verbose ${file}.png | grep mean | tail -1 | awk '{print $2}' | awk -F"." '{print $1}'`
