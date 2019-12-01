@@ -108,13 +108,11 @@ fi
 
 # Check final image is not zero bytes before adding to www dir
 if [ -s ${file}.png ] ; then
-
-# Copy final image to webdir and run webpage update script
-cp ${file}.png ${webdir}                # Copy file to www directory
-cd ${webdir} ; ./makethumbs >/dev/null  # Rebuild web page
-
+  # Copy final image to webdir and run webpage update script
+  cp ${file}.png ${webdir}                # Copy file to www directory
+  cd ${webdir} ; ./makethumbs >/dev/null  # Rebuild web page
 else
-echo "Final image is zero bytes - not copying to www dir" >> ${dir}/jobs.log
+  echo "Final image is zero bytes - not copying to www dir" >> ${dir}/jobs.log
 fi
 
 echo "Completed processing pass ${fileshort}" >> ${dir}/jobs.log
