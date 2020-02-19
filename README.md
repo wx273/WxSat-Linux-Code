@@ -11,5 +11,3 @@ It also has the following hardware requirements:
 
 Hardware - Software Defined Radio (SDR), suitable antenna (I use a homemade QFH), laptop or desktop with suitable Linux distro.
 
-My home site which uses this code is here -> http://cog2.com:81/sat
-No new images there until the new multicoupler arrives.
